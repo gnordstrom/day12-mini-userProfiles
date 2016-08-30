@@ -39,7 +39,7 @@ So now our service should look like this:
 
 ``` javascript
 angular.module('userProfiles').service('mainService', function() {
-  var data = 
+  var data =
   [
     {
         "id": 1,
@@ -66,7 +66,7 @@ angular.module('userProfiles').service('mainService', function() {
 ## Step 3 - Our Service
 Our Service will do most of the apps heavy lifting. We want to keep our controllers as slim as possible. To do that we will need to create a function that delivers our data to our controller.
 - Write a function called "getUsers" that will return all of our user data to the controller
-  - Remember: functions made in a service can be tied to the service via the "this" keyword 
+  - Remember: functions made in a service can be tied to the service via the "this" keyword
 
 ## Step 4 - Our Controller
 The next thing we need to do is to create a function in our controller that gathers the data and prepares it to be sent to the view.
@@ -83,7 +83,7 @@ Now we have an object named "$scope.users" which represents our data. Because it
 # Step 5 - The View
 Now we have our data in our view, but it's a little ugly. Let's do some simple configuration to make it a bit more userfriendly. Typically when you have an array of data, it's a good idea to use ng-repeat to organize it.
 
-Now we should have some awesome user profiles! 
+Now we should have some awesome user profiles!
 
 # Step 6 - Returning to the service
 We want to be able to 'favorite' each user and have that saved and reflected.
@@ -94,6 +94,7 @@ We want to be able to 'favorite' each user and have that saved and reflected.
 `ng-click="toggleFavorite(user.id)`
 Note: This only works because the user.id's match their index in the array of profiles.
 
+
 * Last, we're going to use ng-class to style the html conditionally.  The format looks like this `ng-class="{class-name: javascriptExpression }`
 Our code is going to look like this : `ng-class="{favorite: user.isFavorite}"`.  We're telling angular that when user.isFavorite is true to apply the .favorite class.  And when it's false to remove it.
 
@@ -102,13 +103,13 @@ Our code is going to look like this : `ng-class="{favorite: user.isFavorite}"`. 
 ```javascript
 //controller
 angular.module('userProfiles').controller('MainController', function($scope, mainService){
-    
+
     $scope.getUsers = function(){
         $scope.users = MainService.getUsers();
     }
-    
+
     $scope.getUsers();
-    
+
     $scope.toggleFavorite = MainService.toggleFavorite;
 })
 ```
@@ -140,7 +141,7 @@ angular.module('userProfiles').service('MainService', function(){
     this.getUsers = function(){
         return data;   
     }
-    
+
     this.toggleFavorite = function(userIndex){
         data[userIndex].isFavorite = !data[userIndex].isFavorite;
     }
@@ -157,14 +158,14 @@ angular.module('userProfiles').service('MainService', function(){
     <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body ng-controller="MainController">
-    
+
     <div ng-repeat="user in users" ng-class="{favorite: user.isFavorite}">
         <img ng-src="{{user.avatar}}"></img>
         <span>{{user.first_name}}</span>
         <span>{{user.last_name}}</span>
         <button ng-click="toggleFavorite(user.id)">+</button>
     </div>
-    
+
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
      <script src="app.js"></script>
      <script src="controller.js"></script>
@@ -175,4 +176,3 @@ angular.module('userProfiles').service('MainService', function(){
 
 ## Copyright
 © DevMountain LLC, 2016. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
-
